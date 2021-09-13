@@ -1,0 +1,38 @@
+﻿@model When2Watch.BLL.DTO.CommentDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>View</h1>
+
+<h4>CommentEntity</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-route-seriesId="@ViewBag.seriesId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReplyTo" class="control-label"></label>
+                
+                <span asp-validation-for="ReplyTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="DateTime" class="form-control" type="hidden" />
+                <input asp-for="SeriesId" value="@ViewBag.seriesId" type="hidden" />
+                <input asp-for="ReplyTo" class="form-control" type="hidden"/>
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-route-seriesId="@ViewBag.seriesId" asp-action="Index">Back to List</a>
+</div>
+

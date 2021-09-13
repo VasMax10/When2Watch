@@ -1,0 +1,55 @@
+﻿@model IEnumerable<When2Watch.Models.CommentViewModel>
+
+@{
+    ViewBag.Title = "Comments";
+}
+
+<link rel="stylesheet" href="/css/comment.css">
+
+<h2>Comments for @ViewBag.seriesName</h2>
+
+@foreach (var item in Model)
+{
+    <div class="bg-white p-2">
+        <div class="d-flex flex-row user-info">
+            @if (ViewBag.isAdmin)
+            {
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" asp-route-seriesName="@ViewBag.seriesName">Delete</a>
+            }
+            <img class="rounded-circle" src="https://pbs.twimg.com/profile_images/778628945663123456/vvQEKsl1.jpg" width="40">
+            <div class="d-flex flex-column justify-content-start ml-2">
+                <span class="d-block font-weight-bold name">@item.Author</span>
+                <span class="date text-black-50">@item.DateTime</span>
+            </div>
+        </div>
+        <div class="mt-2">
+            <p class="comment-text">@item.Text</p>
+        </div>
+    </div>
+}
+
+@if (!ViewBag.isBlocked)
+{
+    <div class="bg-light p-2">
+        <form asp-action="Create" asp-route-seriesId="@ViewBag.seriesId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="d-flex flex-row align-items-start">
+                <img class="rounded-circle" src="https://pbs.twimg.com/profile_images/778628945663123456/vvQEKsl1.jpg" width="40">
+                <textarea class="form-control ml-1 shadow-none textarea" asp-for="@Model.ToList().FirstOrDefault().Text"></textarea>
+
+                <input asp-for="@Model.ToList().FirstOrDefault().DateTime" type="hidden" />
+                <input asp-for="@Model.ToList().FirstOrDefault().SeriesId" value="@ViewBag.seriesId" type="hidden" />
+                <input asp-for="@Model.ToList().FirstOrDefault().ReplyTo" class="form-control" type="hidden" />
+            </div>
+
+            <div class="mt-2 text-right">
+                <button class="btn btn-primary btn-sm shadow-none" type="submit" value="Create">Post comment</button>
+            </div>
+        </form>
+    </div>
+}
+    <script>
+        function setReplyTo(id) {
+            document.getElementById("ReplyTo").value = id;
+        }
+    </script>

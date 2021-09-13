@@ -1,0 +1,42 @@
+﻿@model IEnumerable<When2Watch.BLL.DTO.SeasonDTO>
+
+@{ 
+    ViewBag.Title = "Seasons";
+}
+
+<h2>Seasons of @ViewBag.SeriesName</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            №
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.SeasonNumber)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Name)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Description)
+            </th>
+            <th>
+                <a asp-action="Index" asp-controller="Episodes" asp-route-seasonId="@item.Id">Episodes</a>
+            </th>
+        </tr>
+    }
+</table>

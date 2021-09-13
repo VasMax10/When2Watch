@@ -1,0 +1,57 @@
+﻿@model IEnumerable<When2Watch.BLL.DTO.SeriesDTO>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<link rel="stylesheet" href="/css/bookFlipCard.css">
+
+<style media="screen">
+
+    .mini-btn {
+        font-size: 20px;
+        margin: -30px 0px 0px 0px;
+        padding: 0px 10px 0px 10px;
+    }
+
+    div.a {
+        width: 250px;
+        height: 270px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+
+<h2>Results for "@ViewBag.keyword"</h2>
+
+<div class="row mb-4 wow fadeIn justify-content-center">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="margin-left:30px">
+            <div class="img-container">
+                <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2@(item.PosterPath)" alt="" />
+            </div>
+            <div class="card-details">
+                <h3 style="margin-top:-30px">@item.Title</h3>
+                <h5>IMDb: @item.RatingIMDb</h5>
+                <div class="a">@item.Description</div>
+                <br />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <form asp-action="Create" enctype="multipart/form-data">
+
+                    <div>
+                        <input asp-for="@Model.ToList().FirstOrDefault().Title" value="@item.Title" type="hidden" />
+                        <input asp-for="@Model.ToList().FirstOrDefault().TmdbId" value="@item.TmdbId" type="hidden" />
+                        <input asp-for="@Model.ToList().FirstOrDefault().PosterPath" value="@item.PosterPath" type="hidden" />
+                        <input asp-for="@Model.ToList().FirstOrDefault().RatingIMDb" value="@item.RatingIMDb" type="hidden" />
+                        <input asp-for="@Model.ToList().FirstOrDefault().Description" value="@item.Description" type="hidden" />
+                        <input class="btn btn-info" type="submit" value="Add to Watchlist"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        }
+</div>

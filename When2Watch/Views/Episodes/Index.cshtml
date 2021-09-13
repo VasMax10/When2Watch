@@ -1,0 +1,42 @@
+﻿@model IEnumerable<When2Watch.BLL.DTO.EpisodeDTO>
+
+@{ 
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            №
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.EpisodeNumber)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Title)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Description)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </th>
+        </tr>
+    }
+</table>
